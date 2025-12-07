@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>PokiWar - Match-3 RPG Adventure</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Game Match-3 RPG thu phục pet thú vị">
+    <meta name="theme-color" content="#1e88e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PokiWar">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles-3d.css">
+</head>
+<body>
+    <div id="app">
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <div class="player-avatar-top">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%234dabf7'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='white'%3E👤%3C/text%3E%3C/svg%3E" alt="Avatar">
+            </div>
+            <div class="resources">
+                <div class="resource-item gold">
+                    <button class="add-btn">+</button>
+                    <span class="resource-value" id="top-gold">579M</span>
+                    <span class="resource-icon">💰</span>
+                </div>
+                <div class="resource-item gems">
+                    <button class="add-btn">+</button>
+                    <span class="resource-value" id="top-gems">60000</span>
+                    <span class="resource-icon">�</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOBBY SCREEN (3D Isometric) -->
+        <div id="screen-lobby-3d" class="screen active">
+            <div class="lobby-3d-container">
+                <!-- Main Central Building -->
+                <div class="island-item main-building" style="left: 50%; top: 40%; transform: translate(-50%, -50%);">
+                    <div class="island-platform large">
+                        <div class="building-3d central-tower">
+                            <div class="tower-top"></div>
+                            <div class="tower-body"></div>
+                            <div class="tower-base"></div>
+                        </div>
+                    </div>
+                    <div class="island-label">Phó Bản</div>
+                </div>
+
+                <!-- Top Left - Dot Pha (Breakthrough) -->
+                <div class="island-item" style="left: 15%; top: 20%;" onclick="showNotification('🌸 Đột Phá - Coming Soon!')">
+                    <div class="island-platform small">
+                        <div class="building-3d mushroom-house">
+                            <div class="mushroom-cap"></div>
+                            <div class="mushroom-stem"></div>
+                        </div>
+                    </div>
+                    <div class="island-label">Đột Phá</div>
+                </div>
+
+                <!-- Top Right - Arena -->
+                <div class="island-item" style="left: 75%; top: 15%;" onclick="showNotification('⚔️ Đấu Trường - Coming Soon!')">
+                    <div class="island-platform medium">
+                        <div class="building-3d arena">
+                            <div class="arena-top"></div>
+                            <div class="arena-body"></div>
+                        </div>
+                    </div>
+                    <div class="island-label">Đấu Trường</div>
+                </div>
+
+                <!-- Left - Tree/Garden -->
+                <div class="island-item" style="left: 8%; top: 50%;" onclick="showScreen('collection')">
+                    <div class="island-platform small">
+                        <div class="building-3d tree">
+                            <div class="tree-crown"></div>
+                            <div class="tree-trunk"></div>
+                        </div>
+                    </div>
+                    <div class="island-label">Cây Tiến Trí</div>
+                </div>
+
+                <!-- Left Center - Forge -->
+                <div class="island-item" style="left: 25%; top: 55%;" onclick="showNotification('🔨 Nhà Rèn - Coming Soon!')">
+                    <div class="island-platform medium">
+                        <div class="building-3d forge">
+                            <div class="forge-roof"></div>
+                            <div class="forge-body"></div>
+                        </div>
+                    </div>
+                    <div class="island-label">Nhà Rèn</div>
+                </div>
+
+                <!-- Right - Event -->
+                <div class="island-item" style="left: 72%; top: 58%;" onclick="showNotification('🎉 Event - Coming Soon!')">
+                    <div class="island-platform medium">
+                        <div class="building-3d event-building">
+                            <div class="event-top"></div>
+                            <div class="event-body"></div>
+                        </div>
+                    </div>
+                    <div class="island-label">Event</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM MENU -->
+        <div class="bottom-menu">
+            <div class="menu-item active" onclick="showScreen('lobby-3d')">
+                <div class="menu-icon">🏠</div>
+                <div class="menu-label">Sảnh</div>
+            </div>
+            <div class="menu-item" onclick="showScreen('planets')">
+                <div class="menu-icon">🌍</div>
+                <div class="menu-label">Phó Bản</div>
+            </div>
+            <div class="menu-item" onclick="showScreen('collection')">
+                <div class="menu-icon">👾</div>
+                <div class="menu-label">Kho Pet</div>
+            </div>
+            <div class="menu-item" onclick="showNotification('🏪 Shop - Coming Soon!')">
+                <div class="menu-icon">🏪</div>
+                <div class="menu-label">Cửa Hàng</div>
+            </div>
+        </div>
+
+        <!-- PLANETS SCREEN -->
+        <div id="screen-planets" class="screen">
+            <div class="screen-header-3d">
+                <button class="back-btn-3d" onclick="showScreen('lobby-3d')">← Quay lại</button>
+                <h2>🌍 Chọn Hành Tinh</h2>
+            </div>
+            <div class="planets-grid-3d" id="planets-list"></div>
+        </div>
+
+        <!-- STAGES SCREEN -->
+        <div id="screen-stages" class="screen">
+            <div class="screen-header-3d">
+                <button class="back-btn-3d" onclick="showScreen('planets')">← Quay lại</button>
+                <h2 id="planet-title">🌍 Hành Tinh</h2>
+            </div>
+            <div class="stages-grid-3d" id="stages-list"></div>
+        </div>
+
+        <!-- COLLECTION SCREEN -->
+        <div id="screen-collection" class="screen">
+            <div class="screen-header-3d">
+                <button class="back-btn-3d" onclick="showScreen('lobby-3d')">← Quay lại</button>
+                <h2>👾 Kho Pet</h2>
+            </div>
+            <div class="collection-filters">
+                <button class="filter-btn active" data-filter="all">Tất cả</button>
+                <button class="filter-btn" data-filter="fire">🔥 Lửa</button>
+                <button class="filter-btn" data-filter="water">💧 Nước</button>
+                <button class="filter-btn" data-filter="earth">🌍 Đất</button>
+                <button class="filter-btn" data-filter="air">💨 Gió</button>
+            </div>
+            <div class="pets-grid-3d" id="collection-list"></div>
+        </div>
+
+        <!-- STATS SCREEN -->
+        <div id="screen-stats" class="screen">
+            <div class="screen-header-3d">
+                <button class="back-btn-3d" onclick="showScreen('lobby-3d')">← Quay lại</button>
+                <h2>📊 Thống Kê</h2>
+            </div>
+            <div class="stats-container" id="stats-content"></div>
+        </div>
+
+        <!-- PREPARE BATTLE SCREEN -->
+        <div id="screen-prepare" class="screen">
+            <div class="screen-header-3d">
+                <button class="back-btn-3d" onclick="showScreen('stages')">← Quay lại</button>
+                <h2 id="prepare-title">⚔️ Chuẩn Bị Trận Đấu</h2>
+            </div>
+            
+            <div class="prepare-container-3d">
+                <div class="enemy-preview-3d">
+                    <h3>Đối Thủ</h3>
+                    <div class="enemy-card-3d">
+                        <div class="enemy-portrait-large" id="prepare-enemy-portrait">🐾</div>
+                        <div class="enemy-info">
+                            <div class="enemy-name" id="prepare-enemy-name">???</div>
+                            <div class="enemy-stats">
+                                <div class="stat-item">
+                                    <span class="stat-icon">❤️</span>
+                                    <span id="prepare-enemy-hp">100</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">⚔️</span>
+                                    <span id="prepare-enemy-atk">10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rewards-info-3d">
+                        <h4>Phần Thưởng</h4>
+                        <div class="reward-item">💰 <span id="prepare-reward-gold">50</span> Gold</div>
+                        <div class="reward-item">⭐ <span id="prepare-reward-exp">40</span> EXP</div>
+                    </div>
+                </div>
+
+                <div class="team-selection-3d">
+                    <h3>Đội Hình Của Bạn</h3>
+                    <div class="selected-pets-3d" id="selected-pets-list">
+                        <div class="pet-slot-3d empty" onclick="selectPetForBattle(0)">
+                            <div class="slot-number">1</div>
+                            <div class="slot-hint">Click để chọn</div>
+                        </div>
+                        <div class="pet-slot-3d empty" onclick="selectPetForBattle(1)">
+                            <div class="slot-number">2</div>
+                            <div class="slot-hint">Click để chọn</div>
+                        </div>
+                        <div class="pet-slot-3d empty" onclick="selectPetForBattle(2)">
+                            <div class="slot-number">3</div>
+                            <div class="slot-hint">Click để chọn</div>
+                        </div>
+                    </div>
+
+                    <div class="available-pets">
+                        <h4>Pet Có Sẵn</h4>
+                        <div class="pets-list-small" id="available-pets-list"></div>
+                    </div>
+
+                    <button class="start-battle-btn-3d" onclick="startBattle()">
+                        ⚔️ Bắt Đầu Trận Chiến
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BATTLE SCREEN -->
+        <div id="screen-battle" class="screen">
+            <div class="battle-header-3d">
+                <button class="back-btn-3d" onclick="retreatBattle()">🏃 Rút Lui</button>
+                <div class="battle-info">
+                    <span id="battle-stage-name">Ải 1</span>
+                </div>
+            </div>
+
+            <div class="battle-container-3d">
+                <!-- Player Side (Left) -->
+                <div class="battle-player-3d">
+                    <div class="player-pets" id="battle-player-pets"></div>
+                    <div class="player-hp-bar">
+                        <div class="hp-label">HP</div>
+                        <div class="hp-meter">
+                            <span id="battle-player-hp-text">100/100</span>
+                            <div class="hp-fill" id="battle-player-hp-fill"></div>
+                        </div>
+                    </div>
+                    <div class="player-mp-bar">
+                        <div class="mp-label">MP</div>
+                        <div class="mp-meter">
+                            <span id="battle-player-mp-text">50/50</span>
+                            <div class="mp-fill" id="battle-player-mp-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Match-3 Board (Center) -->
+                <div class="board-section-3d">
+                    <div class="turn-indicator-3d" id="battle-turn">Lượt của bạn</div>
+                    <div id="battle-board" class="board-3d"></div>
+                    <div class="battle-skills-3d">
+                        <button class="skill-btn-3d" id="skill-btn-1" onclick="usePetSkill(0)">
+                            <span class="skill-icon">🔥</span>
+                            <span class="skill-name">Skill 1</span>
+                            <span class="skill-cost">30 MP</span>
+                        </button>
+                        <button class="skill-btn-3d" id="skill-btn-2" onclick="usePetSkill(1)">
+                            <span class="skill-icon">�</span>
+                            <span class="skill-name">Skill 2</span>
+                            <span class="skill-cost">30 MP</span>
+                        </button>
+                        <button class="skill-btn-3d" id="skill-btn-3" onclick="usePetSkill(2)">
+                            <span class="skill-icon">⚡</span>
+                            <span class="skill-name">Skill 3</span>
+                            <span class="skill-cost">30 MP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Enemy Side (Right) -->
+                <div class="battle-enemy-3d">
+                    <div class="enemy-portrait-battle" id="battle-enemy-portrait">🐾</div>
+                    <div class="enemy-name-battle" id="battle-enemy-name">Enemy</div>
+                    <div class="enemy-hp-bar">
+                        <div class="hp-label">HP</div>
+                        <div class="hp-meter enemy">
+                            <span id="battle-enemy-hp-text">80/80</span>
+                            <div class="hp-fill enemy" id="battle-enemy-hp-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OVERLAY / MODAL -->
+        <div id="overlay" class="overlay hidden">
+            <div class="dialog-3d">
+                <h2 id="overlay-title"></h2>
+                <p id="overlay-desc"></p>
+                <div id="overlay-content"></div>
+                <button id="overlay-close" class="dialog-btn-3d">OK</button>
+            </div>
+        </div>
+
+        <!-- PET SELECTION MODAL -->
+        <div id="pet-select-modal" class="overlay hidden">
+            <div class="dialog-3d pet-select-dialog">
+                <h2>Chọn Pet</h2>
+                <div class="pet-select-grid" id="pet-select-grid"></div>
+                <button onclick="closePetSelectModal()" class="dialog-btn-3d">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game-data.js"></script>
+    <script src="game-state.js"></script>
+    <script src="game-ui.js"></script>
+    <script src="game-battle.js"></script>
+    <script src="main.js"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('✅ Service Worker registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+        
+        // Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            showInstallButton();
+        });
+        
+        function showInstallButton() {
+            // Create install button if not exists
+            if (!document.getElementById('install-btn')) {
+                const btn = document.createElement('button');
+                btn.id = 'install-btn';
+                btn.innerHTML = '📲 Cài đặt App';
+                btn.style.cssText = `
+                    position: fixed;
+                    bottom: 80px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #1e88e5, #1565c0);
+                    color: white;
+                    border: none;
+                    padding: 12px 20px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    z-index: 9999;
+                    box-shadow: 0 4px 15px rgba(30, 136, 229, 0.4);
+                    animation: pulse 2s ease-in-out infinite;
+                `;
+                btn.onclick = installApp;
+                document.body.appendChild(btn);
+            }
+        }
+        
+        async function installApp() {
+            if (!deferredPrompt) return;
+            
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('✅ Đã cài đặt PWA');
+            }
+            
+            deferredPrompt = null;
+            document.getElementById('install-btn')?.remove();
+        }
+        
+        // Detect if app is installed
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ PWA đã được cài đặt');
+            document.getElementById('install-btn')?.remove();
+        });
+    </script>
+</body>
+</html>
+

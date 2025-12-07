@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokiWar - Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🎮 PokiWar</h1>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="planets">🌍 Hành Tinh</a>
+                <a href="#" class="nav-item" data-tab="stages">⚔️ Mốc (Stages)</a>
+                <a href="#" class="nav-item" data-tab="pets">🐾 Pet Database</a>
+                <a href="#" class="nav-item" data-tab="export">📁 Export/Import</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="back-to-game">🎮 Quay lại Game</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Planets Tab -->
+            <div id="tab-planets" class="tab-content active">
+                <div class="content-header">
+                    <h2>🌍 Quản lý Hành Tinh</h2>
+                    <button class="btn-primary" onclick="showAddPlanetModal()">+ Thêm Hành Tinh</button>
+                </div>
+                <div class="data-grid" id="planets-grid"></div>
+            </div>
+
+            <!-- Stages Tab -->
+            <div id="tab-stages" class="tab-content">
+                <div class="content-header">
+                    <h2>⚔️ Quản lý Mốc (Stages)</h2>
+                    <div class="header-controls">
+                        <select id="stage-planet-select" onchange="loadStagesForPlanet()">
+                            <option value="">-- Chọn Hành Tinh --</option>
+                        </select>
+                        <button class="btn-primary" onclick="showAddStageModal()">+ Thêm Mốc</button>
+                    </div>
+                </div>
+                <div class="data-grid" id="stages-grid"></div>
+            </div>
+
+            <!-- Pets Tab -->
+            <div id="tab-pets" class="tab-content">
+                <div class="content-header">
+                    <h2>🐾 Pet Database</h2>
+                    <button class="btn-primary" onclick="showAddPetModal()">+ Thêm Pet</button>
+                </div>
+                <div class="data-grid" id="pets-grid"></div>
+            </div>
+
+            <!-- Export/Import Tab -->
+            <div id="tab-export" class="tab-content">
+                <div class="content-header">
+                    <h2>📁 Export / Import Data</h2>
+                </div>
+                <div class="export-section">
+                    <div class="export-card">
+                        <h3>📤 Export Data</h3>
+                        <p>Xuất tất cả dữ liệu game (planets, stages, pets) thành file JSON</p>
+                        <button class="btn-primary" onclick="exportAllData()">Export JSON</button>
+                    </div>
+                    <div class="export-card">
+                        <h3>📥 Import Data</h3>
+                        <p>Nhập dữ liệu từ file JSON</p>
+                        <input type="file" id="import-file" accept=".json" onchange="importData(event)">
+                        <button class="btn-secondary" onclick="document.getElementById('import-file').click()">Chọn File</button>
+                    </div>
+                    <div class="export-card">
+                        <h3>🔄 Reset to Default</h3>
+                        <p>Khôi phục dữ liệu về mặc định</p>
+                        <button class="btn-danger" onclick="resetToDefault()">Reset Data</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Planet Modal -->
+    <div id="modal-planet" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="planet-modal-title">Thêm Hành Tinh</h3>
+                <button class="modal-close" onclick="closeModal('modal-planet')">&times;</button>
+            </div>
+            <form id="planet-form" onsubmit="savePlanet(event)">
+                <input type="hidden" id="planet-edit-id">
+                <div class="form-group">
+                    <label>ID (không dấu, viết thường)</label>
+                    <input type="text" id="planet-id" required pattern="[a-z_]+" placeholder="vd: earth, mars">
+                </div>
+                <div class="form-group">
+                    <label>Tên Hành Tinh</label>
+                    <input type="text" id="planet-name" required placeholder="vd: Trái Đất">
+                </div>
+                <div class="form-group">
+                    <label>Emoji</label>
+                    <input type="text" id="planet-emoji" required placeholder="🌍">
+                </div>
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea id="planet-description" placeholder="Mô tả về hành tinh"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Màu sắc</label>
+                    <input type="color" id="planet-color" value="#4CAF50">
+                </div>
+                <div class="form-group">
+                    <label>Yêu cầu mở khóa (số mốc phải hoàn thành)</label>
+                    <input type="number" id="planet-unlock" min="0" value="0">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modal-planet')">Hủy</button>
+                    <button type="submit" class="btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Stage Modal -->
+    <div id="modal-stage" class="modal hidden">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="stage-modal-title">Thêm Mốc</h3>
+                <button class="modal-close" onclick="closeModal('modal-stage')">&times;</button>
+            </div>
+            <form id="stage-form" onsubmit="saveStage(event)">
+                <input type="hidden" id="stage-edit-id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Hành Tinh</label>
+                        <select id="stage-planet" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>ID Stage</label>
+                        <input type="text" id="stage-id" required pattern="[a-z0-9_]+" placeholder="earth_1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tên Boss</label>
+                        <input type="text" id="stage-name" required placeholder="Slime">
+                    </div>
+                    <div class="form-group">
+                        <label>Emoji</label>
+                        <input type="text" id="stage-emoji" required placeholder="🟢">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>HP Boss</label>
+                        <input type="number" id="stage-hp" required min="1" value="100">
+                    </div>
+                    <div class="form-group">
+                        <label>ATK Boss</label>
+                        <input type="number" id="stage-atk" required min="1" value="10">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Pet ID (pet nhận được khi thắng)</label>
+                        <select id="stage-pet"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Loại (Type)</label>
+                        <select id="stage-type">
+                            <option value="earth">🌍 Earth</option>
+                            <option value="fire">🔥 Fire</option>
+                            <option value="water">💧 Water</option>
+                            <option value="air">💨 Air</option>
+                            <option value="light">✨ Light</option>
+                            <option value="dark">🌑 Dark</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gold Reward</label>
+                        <input type="number" id="stage-reward" required min="0" value="50">
+                    </div>
+                    <div class="form-group">
+                        <label>EXP Reward</label>
+                        <input type="number" id="stage-exp" required min="0" value="40">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modal-stage')">Hủy</button>
+                    <button type="submit" class="btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Pet Modal -->
+    <div id="modal-pet" class="modal hidden">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="pet-modal-title">Thêm Pet</h3>
+                <button class="modal-close" onclick="closeModal('modal-pet')">&times;</button>
+            </div>
+            <form id="pet-form" onsubmit="savePet(event)">
+                <input type="hidden" id="pet-edit-id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>ID Pet</label>
+                        <input type="text" id="pet-id" required pattern="[a-z_]+" placeholder="slime">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên Pet</label>
+                        <input type="text" id="pet-name" required placeholder="Slime">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Emoji</label>
+                        <input type="text" id="pet-emoji" required placeholder="🟢">
+                    </div>
+                    <div class="form-group">
+                        <label>Image URL (tùy chọn)</label>
+                        <input type="text" id="pet-image" placeholder="assets/pets/slime.png">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select id="pet-type" required>
+                            <option value="earth">🌍 Earth</option>
+                            <option value="fire">🔥 Fire</option>
+                            <option value="water">💧 Water</option>
+                            <option value="air">💨 Air</option>
+                            <option value="light">✨ Light</option>
+                            <option value="dark">🌑 Dark</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Rarity</label>
+                        <select id="pet-rarity" required>
+                            <option value="common">Common</option>
+                            <option value="uncommon">Uncommon</option>
+                            <option value="rare">Rare</option>
+                            <option value="epic">Epic</option>
+                            <option value="legendary">Legendary</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Base HP</label>
+                        <input type="number" id="pet-hp" required min="1" value="50">
+                    </div>
+                    <div class="form-group">
+                        <label>Base ATK</label>
+                        <input type="number" id="pet-atk" required min="1" value="10">
+                    </div>
+                    <div class="form-group">
+                        <label>Base DEF</label>
+                        <input type="number" id="pet-def" required min="1" value="5">
+                    </div>
+                </div>
+                <h4>Skill</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Skill Name</label>
+                        <input type="text" id="skill-name" required placeholder="Bounce Attack">
+                    </div>
+                    <div class="form-group">
+                        <label>Skill Emoji</label>
+                        <input type="text" id="skill-emoji" required placeholder="💚">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Effect Type</label>
+                        <select id="skill-effect" required>
+                            <option value="dmg">Damage</option>
+                            <option value="heal">Heal</option>
+                            <option value="atkBuff">ATK Buff</option>
+                            <option value="healMana">Heal + Mana</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Power</label>
+                        <input type="number" id="skill-power" required min="1" value="25">
+                    </div>
+                    <div class="form-group">
+                        <label>MP Cost</label>
+                        <input type="number" id="skill-cost" required min="1" value="30">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Skill Description</label>
+                    <input type="text" id="skill-desc" required placeholder="Nhảy lên gây 25 sát thương">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('modal-pet')">Hủy</button>
+                    <button type="submit" class="btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="game-data.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

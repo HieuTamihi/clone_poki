@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokiWar - Offline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            max-width: 400px;
+        }
+        
+        .offline-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .retry-btn {
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(30, 136, 229, 0.4);
+        }
+        
+        .retry-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 136, 229, 0.5);
+        }
+        
+        .tips {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            text-align: left;
+        }
+        
+        .tips h3 {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #ffd700;
+        }
+        
+        .tips ul {
+            list-style: none;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .tips li {
+            padding: 5px 0;
+        }
+        
+        .tips li::before {
+            content: '✓ ';
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <h1>Bạn đang Offline</h1>
+        <p>Không thể kết nối mạng. Vui lòng kiểm tra kết nối internet của bạn và thử lại.</p>
+        <button class="retry-btn" onclick="location.reload()">🔄 Thử Lại</button>
+        
+        <div class="tips">
+            <h3>💡 Mẹo:</h3>
+            <ul>
+                <li>Kiểm tra WiFi hoặc dữ liệu di động</li>
+                <li>Tắt chế độ máy bay</li>
+                <li>Di chuyển đến nơi có sóng tốt hơn</li>
+                <li>Game sẽ tự động load khi có mạng</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
