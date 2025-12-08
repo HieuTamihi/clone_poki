@@ -2,7 +2,7 @@
 // SERVICE WORKER - POKIWAR PWA
 // ========================================
 
-const CACHE_NAME = 'pokiwar-v1';
+const CACHE_NAME = 'pokiwar-v2';
 const OFFLINE_URL = 'offline.html';
 
 // Files to cache for offline use
