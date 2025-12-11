@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://truyenvitvang.site/sitemap.xml
+
+# Disallow admin and private files
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+
+# Allow all other pages
+Allow: /index.html
+Allow: /about.html
+Allow: /guide.html
+Allow: /blog.html
+Allow: /privacy.html
+
+# Allow assets
+Allow: /assets/
+Allow: /icons/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.webp

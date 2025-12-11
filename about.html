@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Thiệu - PokiWar: Game Match-3 RPG Phiêu Lưu</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="PokiWar là game Match-3 RPG kết hợp giữa gameplay xếp hình và chiến đấu chiến thuật. Thu phục hàng trăm pet độc đáo, khám phá thế giới rộng lớn và trở thành huấn luyện viên huyền thoại.">
+    <meta name="keywords" content="pokiwar, game match-3, rpg, thu phục pet, game chiến thuật, game online, truyenvitvang">
+    <meta name="author" content="TruyenVitVang Game Studio">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PokiWar - Game Match-3 RPG Phiêu Lưu">
+    <meta property="og:description" content="Thu phục pet, khám phá thế giới và chiến đấu trong game Match-3 RPG độc đáo">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4878455337844727"
+     crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #667eea;
+            padding-left: 1rem;
+        }
+
+        .content-section h3 {
+            color: #764ba2;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-box .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box .label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">🎮 PokiWar</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Chơi Game</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="guide.html">Hướng Dẫn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="privacy.html">Chính Sách</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1>🎮 PokiWar - Phiêu Lưu Match-3 RPG</h1>
+            <p>Khám phá thế giới kỳ diệu nơi bạn có thể thu phục hàng trăm pet độc đáo, chiến đấu trong các trận đấu Match-3 đầy kịch tính và trở thành huấn luyện viên huyền thoại!</p>
+        </div>
+
+        <div class="content-section">
+            <h2>📖 Câu Chuyện</h2>
+            <p>Trong một thế giới song song nơi con người và các sinh vật huyền bí cùng tồn tại, một thế lực tà ác đang âm mưu phá hủy sự cân bằng. Với tư cách là một huấn luyện viên trẻ tuổi, bạn được giao nhiệm vụ du hành khắp các hành tinh, thu phục các Pet mạnh mẽ và ngăn chặn thảm họa sắp xảy ra.</p>
+            
+            <p>Hành trình của bạn sẽ đưa bạn qua nhiều vùng đất khác nhau - từ những khu rừng xanh tươi, sa mạc nóng bỏng, đến những ngọn núi băng giá và những thành phố công nghệ cao. Mỗi nơi đều ẩn chứa những bí mật riêng và những Pet độc đáo đang chờ đợi được khám phá.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🎯 Đặc Điểm Nổi Bật</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">🎲</div>
+                    <h3>Gameplay Match-3 Độc Đáo</h3>
+                    <p>Kết hợp các viên ngọc cùng màu để tạo ra đòn tấn công mạnh mẽ và kỹ năng đặc biệt</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">👾</div>
+                    <h3>Hệ Thống Pet Phong Phú</h3>
+                    <p>Thu phục và nâng cấp hơn 100+ Pet với 5 hệ nguyên tố khác nhau</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">⚔️</div>
+                    <h3>Chiến Đấu Chiến Thuật</h3>
+                    <p>Xây dựng đội hình tối ưu và sử dụng kỹ năng một cách khôn ngoan</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🌍</div>
+                    <h3>Thế Giới Rộng Lớn</h3>
+                    <p>Khám phá 8 hành tinh với hơn 100 màn chơi đầy thử thách</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎨</div>
+                    <h3>Đồ Họa 3D Đẹp Mắt</h3>
+                    <p>Thiết kế isometric 3D hiện đại với hiệu ứng mượt mà</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>Chơi Mọi Lúc Mọi Nơi</h3>
+                    <p>Progressive Web App - Cài đặt và chơi offline trên mọi thiết bị</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔥 Hệ Thống Nguyên Tố</h2>
+            <p>PokiWar có 5 hệ nguyên tố chính, mỗi hệ có điểm mạnh và điểm yếu riêng:</p>
+            
+            <h3>🔥 Hệ Lửa (Fire)</h3>
+            <p>Pet hệ Lửa mạnh mẽ với sát thương cao, đặc biệt hiệu quả chống lại hệ Đất nhưng yếu trước hệ Nước. Thích hợp cho lối chơi tấn công mạnh mẽ.</p>
+            
+            <h3>💧 Hệ Nước (Water)</h3>
+            <p>Pet hệ Nước cân bằng giữa tấn công và phòng thủ, khắc chế hệ Lửa nhưng yếu trước hệ Đất. Phù hợp với người chơi thích chiến thuật linh hoạt.</p>
+            
+            <h3>🌍 Hệ Đất (Earth)</h3>
+            <p>Pet hệ Đất có HP cao và khả năng phòng thủ tốt, mạnh chống lại hệ Nước nhưng yếu trước hệ Lửa. Lý tưởng cho đội hình tank.</p>
+            
+            <h3>💨 Hệ Gió (Air)</h3>
+            <p>Pet hệ Gió nhanh nhẹn với kỹ năng hỗ trợ đa dạng, không có điểm yếu rõ ràng nhưng cũng không có ưu thế tuyệt đối. Tốt cho vai trò support.</p>
+            
+            <h3>⚡ Hệ Sét (Lightning)</h3>
+            <p>Pet hệ Sét hiếm và mạnh mẽ, có khả năng gây sát thương diện rộng. Cân bằng tốt nhưng khó thu phục.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 Thống Kê Game</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number">100+</div>
+                    <div class="label">Pet Độc Đáo</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">8</div>
+                    <div class="label">Hành Tinh</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">120+</div>
+                    <div class="label">Màn Chơi</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">50+</div>
+                    <div class="label">Kỹ Năng</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎮 Về TruyenVitVang Game Studio</h2>
+            <p>TruyenVitVang Game Studio là đội ngũ phát triển game độc lập tại Việt Nam, chuyên tạo ra các trò chơi web HTML5 chất lượng cao. Chúng tôi tin rằng game không chỉ là giải trí mà còn là nghệ thuật và câu chuyện.</p>
+            
+            <p>PokiWar là dự án đầu tay của chúng tôi, được phát triển với mục tiêu mang đến trải nghiệm Match-3 RPG độc đáo, kết hợp giữa gameplay đơn giản dễ tiếp cận nhưng vẫn có chiều sâu chiến thuật.</p>
+            
+            <h3>🎯 Sứ Mệnh</h3>
+            <p>Tạo ra những trò chơi chất lượng cao, miễn phí và dễ tiếp cận cho mọi người. Chúng tôi tin vào việc xây dựng cộng đồng game thủ Việt Nam mạnh mẽ và sáng tạo.</p>
+            
+            <h3>🔮 Tầm Nhìn</h3>
+            <p>Trở thành studio game web hàng đầu Việt Nam, phát triển các game có thể chơi được trên mọi nền tảng mà không cần cài đặt phức tạp.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🚀 Lộ Trình Phát Triển</h2>
+            
+            <h3>✅ Phiên Bản 1.0 (Hiện Tại)</h3>
+            <ul>
+                <li>Hệ thống Match-3 cơ bản</li>
+                <li>8 hành tinh với 120+ màn chơi</li>
+                <li>100+ Pet có thể thu phục</li>
+                <li>Hệ thống chiến đấu PvE</li>
+                <li>Progressive Web App (PWA)</li>
+            </ul>
+            
+            <h3>🔄 Phiên Bản 1.5 (Đang Phát Triển)</h3>
+            <ul>
+                <li>Hệ thống PvP Arena</li>
+                <li>Event đặc biệt hàng tuần</li>
+                <li>Thêm 50+ Pet mới</li>
+                <li>Hệ thống Đột Phá (Breakthrough)</li>
+                <li>Nhà Rèn - Nâng cấp trang bị</li>
+            </ul>
+            
+            <h3>🎯 Phiên Bản 2.0 (Kế Hoạch)</h3>
+            <ul>
+                <li>Chế độ Guild/Clan</li>
+                <li>Boss Raid cộng đồng</li>
+                <li>Hệ thống Trading</li>
+                <li>Thêm hành tinh mới</li>
+                <li>Multiplayer real-time</li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h2>🎮 Sẵn Sàng Bắt Đầu Phiêu Lưu?</h2>
+            <p>Tham gia ngay hôm nay và trở thành huấn luyện viên huyền thoại!</p>
+            <a href="index.html" class="cta-button">Chơi Ngay</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TruyenVitVang Game Studio. All rights reserved.</p>
+        <p>
+            <a href="privacy.html" style="color: #667eea; text-decoration: none;">Chính Sách Bảo Mật</a> | 
+            <a href="about.html" style="color: #667eea; text-decoration: none;">Về Chúng Tôi</a> | 
+            <a href="blog.html" style="color: #667eea; text-decoration: none;">Blog</a>
+        </p>
+    </footer>
+</body>
+</html>

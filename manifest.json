@@ -4,7 +4,7 @@
     "description": "Game Match-3 RPG thu phục pet thú vị",
     "start_url": "./index.html",
     "display": "fullscreen",
-    "orientation": "any",
+    "orientation": "landscape",
     "background_color": "#1a1a2e",
     "theme_color": "#1e88e5",
     "icons": [

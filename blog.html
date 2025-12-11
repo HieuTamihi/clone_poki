@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - PokiWar Game Development & Tips</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Blog về phát triển game PokiWar, mẹo chơi game, cập nhật phiên bản mới và tin tức từ TruyenVitVang Game Studio">
+    <meta name="keywords" content="pokiwar blog, game development, tips and tricks, game updates, match-3 strategy">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4878455337844727"
+     crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .blog-category {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .blog-card h2 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-card p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .read-more:hover {
+            gap: 0.8rem;
+        }
+
+        .blog-article {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: none;
+        }
+
+        .blog-article.active {
+            display: block;
+        }
+
+        .blog-article h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-article h2 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .blog-article h3 {
+            color: #667eea;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        .blog-article p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .blog-article ul, .blog-article ol {
+            margin: 1rem 0 1rem 2rem;
+            color: #555;
+        }
+
+        .blog-article li {
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-blog {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #f39c12;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .blog-article {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">🎮 PokiWar</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Chơi Game</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="guide.html">Hướng Dẫn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="privacy.html">Chính Sách</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>📝 Blog PokiWar</h1>
+            <p>Tin tức, mẹo chơi game và hậu trường phát triển</p>
+        </div>
+
+        <div id="blog-list">
+            <div class="blog-grid">
+                <!-- Article 1 -->
+                <div class="blog-card" onclick="showArticle('article1')">
+                    <div class="blog-image">🎮</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Phát Triển</span>
+                            <span>📅 8/12/2024</span>
+                        </div>
+                        <h2>Hành Trình Phát Triển PokiWar</h2>
+                        <p>Câu chuyện đằng sau việc tạo ra một game Match-3 RPG từ ý tưởng ban đầu đến sản phẩm hoàn chỉnh...</p>
+                        <a class="read-more">Đọc thêm →</a>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="blog-card" onclick="showArticle('article2')">
+                    <div class="blog-image">💡</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Mẹo Chơi</span>
+                            <span>📅 7/12/2024</span>
+                        </div>
+                        <h2>10 Mẹo Để Trở Thành Pro Player</h2>
+                        <p>Những chiến thuật và mẹo hay giúp bạn chiến thắng mọi trận đấu trong PokiWar...</p>
+                        <a class="read-more">Đọc thêm →</a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="blog-card" onclick="showArticle('article3')">
+                    <div class="blog-image">🔥</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Hướng Dẫn</span>
+                            <span>📅 6/12/2024</span>
+                        </div>
+                        <h2>Top 5 Pet Mạnh Nhất Cho Người Mới</h2>
+                        <p>Danh sách những Pet dễ kiếm nhưng cực kỳ mạnh mẽ, phù hợp cho người mới bắt đầu...</p>
+                        <a class="read-more">Đọc thêm →</a>
+                    </div>
+                </div>
+
+                <!-- Article 4 -->
+                <div class="blog-card" onclick="showArticle('article4')">
+                    <div class="blog-image">⚡</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Cập Nhật</span>
+                            <span>📅 5/12/2024</span>
+                        </div>
+                        <h2>Cập Nhật Phiên Bản 1.0 - Ra Mắt Chính Thức</h2>
+                        <p>Những tính năng mới và cải tiến trong phiên bản ra mắt chính thức của PokiWar...</p>
+                        <a class="read-more">Đọc thêm →</a>
+                    </div>
+                </div>
+
+                <!-- Article 5 -->
+                <div class="blog-card" onclick="showArticle('article5')">
+                    <div class="blog-image">🎨</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Phát Triển</span>
+                            <span>📅 4/12/2024</span>
+                        </div>
+                        <h2>Thiết Kế Đồ Họa 3D Isometric</h2>
+                        <p>Quá trình thiết kế và tạo ra phong cách đồ họa 3D isometric độc đáo cho PokiWar...</p>
+                        <a class="read-more">Đọc thêm →</a>
+                    </div>
+                </div>
+
+                <!-- Article 6 -->
+                <div class="blog-card" onclick="showArticle('article6')">
+                    <div class="blog-image">🏆</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Chiến Thuật</span>
+                            <span>📅 3/12/2024</span>
+                        </div>
+                        <h2>Chiến Thuật Xây Dựng Đội Hình Tối Ưu</h2>
+                        <p>Hướng dẫn chi tiết cách xây dựng đội hình cân bằng và mạnh mẽ cho mọi tình huống...</p>
+                        <a class="read-more">Đọc thêm →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article 1 Full -->
+        <div id="article1" class="blog-article">
+            <button class="back-to-blog" onclick="backToBlog()">← Quay lại Blog</button>
+            
+            <h1>🎮 Hành Trình Phát Triển PokiWar</h1>
+            <div class="blog-meta" style="margin-bottom: 2rem;">
+                <span class="blog-category">Phát Triển</span>
+                <span>📅 8 Tháng 12, 2024</span>
+                <span>✍️ TruyenVitVang Team</span>
+            </div>
+
+            <p>Xin chào các bạn! Hôm nay tôi muốn chia sẻ câu chuyện đằng sau việc phát triển PokiWar - từ một ý tưởng đơn giản đến một game Match-3 RPG hoàn chỉnh.</p>
+
+            <h2>💭 Ý Tưởng Ban Đầu</h2>
+            <p>Tất cả bắt đầu từ tháng 6 năm 2024, khi team chúng tôi đang tìm kiếm một dự án game web có thể tiếp cận được đông đảo người chơi Việt Nam. Chúng tôi nhận thấy rằng:</p>
+            
+            <ul>
+                <li>Game Match-3 rất phổ biến và dễ tiếp cận</li>
+                <li>RPG có độ sâu và khả năng giữ chân người chơi lâu dài</li>
+                <li>Kết hợp cả hai có thể tạo ra trải nghiệm độc đáo</li>
+                <li>Progressive Web App cho phép chơi mọi lúc mọi nơi</li>
+            </ul>
+
+            <p>Và thế là ý tưởng về PokiWar ra đời - một game kết hợp gameplay Match-3 đơn giản với hệ thống RPG sâu sắc.</p>
+
+            <h2>🛠️ Giai Đoạn Phát Triển</h2>
+            
+            <h3>Tháng 6-7: Prototype và Game Design</h3>
+            <p>Hai tháng đầu tiên được dành để:</p>
+            <ul>
+                <li>Thiết kế game mechanics cơ bản</li>
+                <li>Tạo prototype cho hệ thống Match-3</li>
+                <li>Thiết kế hệ thống Pet và nguyên tố</li>
+                <li>Lên kế hoạch cho 8 hành tinh và 100+ màn chơi</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Thử Thách:</strong> Cân bằng giữa độ khó của Match-3 và RPG là một thách thức lớn. Chúng tôi đã phải thử nghiệm rất nhiều để tìm ra công thức phù hợp.
+            </div>
+
+            <h3>Tháng 8-9: Phát Triển Core Gameplay</h3>
+            <p>Giai đoạn này tập trung vào:</p>
+            <ul>
+                <li>Xây dựng engine Match-3 với các combo đặc biệt</li>
+                <li>Phát triển hệ thống chiến đấu</li>
+                <li>Tạo ra 50+ Pet đầu tiên</li>
+                <li>Implement hệ thống progression</li>
+            </ul>
+
+            <h3>Tháng 10-11: Đồ Họa và Polish</h3>
+            <p>Hai tháng cuối dành cho:</p>
+            <ul>
+                <li>Thiết kế đồ họa 3D isometric</li>
+                <li>Tạo animations và effects</li>
+                <li>Tối ưu hóa performance</li>
+                <li>Testing và bug fixing</li>
+            </ul>
+
+            <h2>🎨 Quyết Định Thiết Kế</h2>
+            
+            <h3>Tại Sao Chọn 3D Isometric?</h3>
+            <p>Chúng tôi muốn tạo ra một phong cách visual độc đáo, khác biệt với các game Match-3 truyền thống. Isometric 3D mang lại:</p>
+            <ul>
+                <li>Chiều sâu và không gian 3D mà không cần WebGL phức tạp</li>
+                <li>Phong cách retro-modern thu hút</li>
+                <li>Performance tốt trên mọi thiết bị</li>
+                <li>Dễ dàng mở rộng và thêm nội dung mới</li>
+            </ul>
+
+            <h3>Progressive Web App</h3>
+            <p>Quyết định làm PWA thay vì native app vì:</p>
+            <ul>
+                <li>Không cần download từ store</li>
+                <li>Cập nhật tức thì, không cần người chơi update</li>
+                <li>Chơi được trên mọi nền tảng</li>
+                <li>Có thể cài đặt và chơi offline</li>
+            </ul>
+
+            <h2>📊 Những Con Số Thú Vị</h2>
+            <ul>
+                <li><strong>6 tháng</strong> phát triển</li>
+                <li><strong>15,000+</strong> dòng code</li>
+                <li><strong>100+</strong> Pet được thiết kế</li>
+                <li><strong>120+</strong> màn chơi</li>
+                <li><strong>50+</strong> kỹ năng độc đáo</li>
+                <li><strong>8</strong> hành tinh với theme riêng biệt</li>
+            </ul>
+
+            <h2>🔮 Tương Lai</h2>
+            <p>Đây mới chỉ là bước đầu tiên. Chúng tôi có kế hoạch:</p>
+            <ul>
+                <li>Thêm chế độ PvP Arena</li>
+                <li>Event đặc biệt hàng tuần</li>
+                <li>Thêm 50+ Pet mới mỗi quý</li>
+                <li>Hệ thống Guild/Clan</li>
+                <li>Boss Raid cộng đồng</li>
+            </ul>
+
+            <p>Cảm ơn các bạn đã đồng hành cùng PokiWar. Hãy tiếp tục theo dõi blog để cập nhật những tin tức mới nhất!</p>
+        </div>
+
+        <!-- Article 2 Full -->
+        <div id="article2" class="blog-article">
+            <button class="back-to-blog" onclick="backToBlog()">← Quay lại Blog</button>
+            
+            <h1>💡 10 Mẹo Để Trở Thành Pro Player</h1>
+            <div class="blog-meta" style="margin-bottom: 2rem;">
+                <span class="blog-category">Mẹo Chơi</span>
+                <span>📅 7 Tháng 12, 2024</span>
+            </div>
+
+            <p>Sau nhiều giờ chơi và nghiên cứu, đây là 10 mẹo quan trọng nhất giúp bạn nâng cao kỹ năng chơi PokiWar:</p>
+
+            <h2>1. 👀 Luôn Nhìn Toàn Bộ Bảng</h2>
+            <p>Đừng vội vàng di chuyển ngay khi thấy một combo 3. Hãy dành 2-3 giây để quan sát toàn bộ bảng, tìm kiếm cơ hội tạo combo lớn hơn hoặc combo đặc biệt.</p>
+            
+            <div class="highlight-box">
+                <strong>Mẹo Pro:</strong> Bắt đầu quan sát từ góc trên cùng, quét xuống dưới. Điều này giúp bạn phát hiện các cơ hội cascade tốt hơn.
+            </div>
+
+            <h2>2. 🎯 Ưu Tiên Combo Đặc Biệt</h2>
+            <p>Một combo 4-5 viên mạnh hơn nhiều so với 2-3 combo 3 viên. Đặc biệt:</p>
+            <ul>
+                <li>Combo 5 thẳng hàng (Color Bomb) có thể thay đổi cục diện trận đấu</li>
+                <li>Combo 4 viên (Lightning) hiệu quả để clear hàng/cột</li>
+                <li>Kết hợp 2 viên đặc biệt tạo hiệu ứng cực mạnh</li>
+            </ul>
+
+            <h2>3. 💎 Quản Lý MP Thông Minh</h2>
+            <p>MP là tài nguyên quý giá. Đừng lãng phí vào skill yếu:</p>
+            <ul>
+                <li>Chờ đến khi có ít nhất 60-70 MP trước khi dùng skill mạnh</li>
+                <li>Kết hợp skill với combo lớn để tối đa hóa sát thương</li>
+                <li>Giữ một ít MP để dùng skill heal khi cần thiết</li>
+            </ul>
+
+            <h2>4. 🔥 Tận Dụng Nguyên Tố</h2>
+            <p>Sát thương x2 khi có lợi thế nguyên tố là rất lớn:</p>
+            <ul>
+                <li>Luôn kiểm tra hệ nguyên tố của kẻ địch trước trận</li>
+                <li>Ưu tiên tạo combo nguyên tố có lợi thế</li>
+                <li>Tránh dùng skill nguyên tố bất lợi</li>
+            </ul>
+
+            <h2>5. 🏗️ Xây Dựng Đội Hình Cân Bằng</h2>
+            <p>Đội hình lý tưởng cần:</p>
+            <ul>
+                <li>1 Tank (HP cao, DEF cao)</li>
+                <li>1-2 DPS (ATK cao)</li>
+                <li>1 Support/Healer</li>
+                <li>Đa dạng nguyên tố để counter nhiều loại địch</li>
+            </ul>
+
+            <h2>6. 📈 Nâng Cấp Tập Trung</h2>
+            <p>Thay vì nâng đều tất cả Pet, hãy:</p>
+            <ul>
+                <li>Chọn 3-5 Pet chính để tập trung nâng cấp</li>
+                <li>Nâng Pet đó lên max level trước khi chuyển sang Pet khác</li>
+                <li>Ưu tiên Pet có skill mạnh và phù hợp với phong cách chơi</li>
+            </ul>
+
+            <h2>7. 🎲 Tạo Cascade Hiệu Quả</h2>
+            <p>Cascade (combo dây chuyền) là chìa khóa để gây sát thương lớn:</p>
+            <ul>
+                <li>Tạo combo ở vị trí cao (hàng trên) để tăng cơ hội cascade</li>
+                <li>Quan sát các viên đang rơi để dự đoán combo tiếp theo</li>
+                <li>Kết hợp với skill AOE để tạo cascade lớn</li>
+            </ul>
+
+            <h2>8. ⏰ Timing Skill Hoàn Hảo</h2>
+            <p>Thời điểm dùng skill rất quan trọng:</p>
+            <ul>
+                <li><strong>Skill Buff:</strong> Dùng trước khi tạo combo lớn</li>
+                <li><strong>Skill Debuff:</strong> Dùng ngay đầu trận</li>
+                <li><strong>Skill Heal:</strong> Dùng khi HP dưới 30%</li>
+                <li><strong>Skill Nuke:</strong> Giữ cho boss hoặc tình huống khẩn cấp</li>
+            </ul>
+
+            <h2>9. 💰 Farm Hiệu Quả</h2>
+            <p>Để có tài nguyên nhanh nhất:</p>
+            <ul>
+                <li>Farm màn boss có tỷ lệ drop cao</li>
+                <li>Hoàn thành daily quest trước khi farm</li>
+                <li>Farm trong event có bonus drop</li>
+                <li>Sử dụng đội hình tối ưu để clear nhanh</li>
+            </ul>
+
+            <h2>10. 📚 Học Hỏi Liên Tục</h2>
+            <p>Game luôn cập nhật và thay đổi:</p>
+            <ul>
+                <li>Theo dõi blog để biết meta mới nhất</li>
+                <li>Thử nghiệm các đội hình và chiến thuật mới</li>
+                <li>Học hỏi từ các player khác</li>
+                <li>Đọc kỹ mô tả skill và passive của Pet</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Bonus Tip:</strong> Hãy chơi với tâm thế vui vẻ và thư giãn. Đừng quá căng thẳng vì thắng thua. Kỹ năng sẽ tự nhiên cải thiện theo thời gian!
+            </div>
+
+            <p>Chúc các bạn chơi game vui vẻ và sớm trở thành Pro Player!</p>
+        </div>
+
+        <!-- Article 3 Full -->
+        <div id="article3" class="blog-article">
+            <button class="back-to-blog" onclick="backToBlog()">← Quay lại Blog</button>
+            
+            <h1>🔥 Top 5 Pet Mạnh Nhất Cho Người Mới</h1>
+            <div class="blog-meta" style="margin-bottom: 2rem;">
+                <span class="blog-category">Hướng Dẫn</span>
+                <span>📅 6 Tháng 12, 2024</span>
+            </div>
+
+            <p>Bạn mới bắt đầu chơi PokiWar và không biết nên tập trung vào Pet nào? Đây là danh sách 5 Pet dễ kiếm nhưng cực kỳ mạnh mẽ!</p>
+
+            <h2>1. 🔥 Flamey - Hệ Lửa</h2>
+            <p><strong>Cách kiếm:</strong> Pet khởi đầu hoặc drop ở Planet 1</p>
+            <p><strong>Tại sao mạnh:</strong></p>
+            <ul>
+                <li>ATK cao nhất trong các Pet tier thấp</li>
+                <li>Skill "Fireball" gây sát thương lớn chỉ với 30 MP</li>
+                <li>Dễ nâng cấp vì drop rate cao</li>
+                <li>Hiệu quả chống lại nhiều boss đầu game</li>
+            </ul>
+            <p><strong>Cách dùng:</strong> Đặt ở vị trí DPS chính, kết hợp với Tank để bảo vệ.</p>
+
+            <h2>2. 💧 Aquos - Hệ Nước</h2>
+            <p><strong>Cách kiếm:</strong> Pet khởi đầu hoặc Planet 2</p>
+            <p><strong>Tại sao mạnh:</strong></p>
+            <ul>
+                <li>Cân bằng giữa ATK và DEF</li>
+                <li>Skill "Water Shield" giảm 30% sát thương nhận vào</li>
+                <li>Passive tăng 10% HP cho cả đội</li>
+                <li>Versatile - phù hợp nhiều tình huống</li>
+            </ul>
+            <p><strong>Cách dùng:</strong> Có thể làm Tank phụ hoặc DPS tùy tình huống.</p>
+
+            <h2>3. 🌍 Rocky - Hệ Đất</h2>
+            <p><strong>Cách kiếm:</strong> Pet khởi đầu hoặc Planet 1-2</p>
+            <p><strong>Tại sao mạnh:</strong></p>
+            <ul>
+                <li>HP và DEF cao nhất early game</li>
+                <li>Skill "Stone Wall" tạo shield cho cả đội</li>
+                <li>Rất khó chết, phù hợp làm Tank chính</li>
+                <li>Counter hiệu quả các Pet hệ Nước</li>
+            </ul>
+            <p><strong>Cách dùng:</strong> Tank chính, đứng đầu để nhận sát thương.</p>
+
+            <h2>4. ⚡ Sparky - Hệ Sét</h2>
+            <p><strong>Cách kiếm:</strong> Drop hiếm ở Planet 2-3</p>
+            <p><strong>Tại sao mạnh:</strong></p>
+            <ul>
+                <li>Skill AOE "Chain Lightning" hit nhiều mục tiêu</li>
+                <li>Tốc độ cao, hành động trước</li>
+                <li>Không bị counter bởi bất kỳ hệ nào</li>
+                <li>Cực mạnh trong các trận có nhiều minion</li>
+            </ul>
+            <p><strong>Cách dùng:</strong> DPS AOE, đặc biệt hiệu quả với boss có minion.</p>
+
+            <h2>5. 💨 Windy - Hệ Gió</h2>
+            <p><strong>Cách kiếm:</strong> Planet 3 hoặc event</p>
+            <p><strong>Tại sao mạnh:</strong></p>
+            <ul>
+                <li>Skill "Healing Breeze" hồi 25% HP cho cả đội</li>
+                <li>Passive tăng 15% MP recovery</li>
+                <li>Tốc độ cao, heal kịp thời</li>
+                <li>Essential cho các trận dài</li>
+            </ul>
+            <p><strong>Cách dùng:</strong> Support/Healer, giữ cả đội sống sót.</p>
+
+            <h2>🏆 Đội Hình Gợi Ý</h2>
+            <p>Kết hợp 3 trong 5 Pet trên để có đội hình mạnh:</p>
+            
+            <h3>Đội Hình Cân Bằng</h3>
+            <ul>
+                <li><strong>Rocky</strong> (Tank) - Nhận sát thương</li>
+                <li><strong>Flamey</strong> (DPS) - Gây sát thương chính</li>
+                <li><strong>Windy</strong> (Support) - Hồi máu và buff</li>
+            </ul>
+
+            <h3>Đội Hình Tấn Công</h3>
+            <ul>
+                <li><strong>Aquos</strong> (Off-tank) - Tank kiêm DPS</li>
+                <li><strong>Flamey</strong> (DPS) - Sát thương đơn mục tiêu</li>
+                <li><strong>Sparky</strong> (DPS AOE) - Sát thương diện rộng</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Lưu Ý:</strong> Tất cả 5 Pet này đều có thể kiếm được miễn phí trong vòng 1-2 tuần chơi. Không cần mua Gems!
+            </div>
+
+            <p>Chúc các bạn sớm thu phục được những Pet mạnh mẽ này!</p>
+        </div>
+
+        <!-- Remaining articles (4, 5, 6) with similar structure -->
+        <div id="article4" class="blog-article">
+            <button class="back-to-blog" onclick="backToBlog()">← Quay lại Blog</button>
+            <h1>⚡ Cập Nhật Phiên Bản 1.0 - Ra Mắt Chính Thức</h1>
+            <div class="blog-meta" style="margin-bottom: 2rem;">
+                <span class="blog-category">Cập Nhật</span>
+                <span>📅 5 Tháng 12, 2024</span>
+            </div>
+            <p>Chúng tôi vô cùng vui mừng thông báo PokiWar chính thức ra mắt phiên bản 1.0! Sau 6 tháng phát triển không ngừng nghỉ, game đã sẵn sàng để các bạn trải nghiệm...</p>
+            <h2>🎉 Tính Năng Chính</h2>
+            <ul>
+                <li>8 hành tinh với 120+ màn chơi độc đáo</li>
+                <li>100+ Pet có thể thu phục và nâng cấp</li>
+                <li>Hệ thống Match-3 với combo đặc biệt</li>
+                <li>Progressive Web App - Chơi offline</li>
+                <li>Đồ họa 3D isometric đẹp mắt</li>
+            </ul>
+            <p>Hãy tải game ngay và bắt đầu cuộc phiêu lưu của bạn!</p>
+        </div>
+
+        <div id="article5" class="blog-article">
+            <button class="back-to-blog" onclick="backToBlog()">← Quay lại Blog</button>
+            <h1>🎨 Thiết Kế Đồ Họa 3D Isometric</h1>
+            <div class="blog-meta" style="margin-bottom: 2rem;">
+                <span class="blog-category">Phát Triển</span>
+                <span>📅 4 Tháng 12, 2024</span>
+            </div>
+            <p>Một trong những quyết định quan trọng nhất trong quá trình phát triển PokiWar là chọn phong cách đồ họa 3D isometric. Hôm nay tôi muốn chia sẻ về quá trình thiết kế này...</p>
+            <h2>🎯 Tại Sao Isometric?</h2>
+            <p>Isometric 3D mang lại nhiều lợi ích:</p>
+            <ul>
+                <li>Tạo chiều sâu 3D mà không cần WebGL phức tạp</li>
+                <li>Performance tốt trên mọi thiết bị</li>
+                <li>Phong cách retro-modern thu hút</li>
+                <li>Dễ dàng tạo assets mới</li>
+            </ul>
+        </div>
+
+        <div id="article6" class="blog-article">
+            <button class="back-to-blog" onclick="backToBlog()">← Quay lại Blog</button>
+            <h1>🏆 Chiến Thuật Xây Dựng Đội Hình Tối Ưu</h1>
+            <div class="blog-meta" style="margin-bottom: 2rem;">
+                <span class="blog-category">Chiến Thuật</span>
+                <span>📅 3 Tháng 12, 2024</span>
+            </div>
+            <p>Xây dựng đội hình tối ưu là yếu tố quyết định thắng thua trong PokiWar. Hãy cùng tìm hiểu cách tạo ra đội hình mạnh nhất...</p>
+            <h2>🎯 Nguyên Tắc Cơ Bản</h2>
+            <ul>
+                <li><strong>Cân bằng vai trò:</strong> Tank, DPS, Support</li>
+                <li><strong>Đa dạng nguyên tố:</strong> Ít nhất 2-3 hệ khác nhau</li>
+                <li><strong>Synergy:</strong> Pet hỗ trợ lẫn nhau</li>
+                <li><strong>Counter:</strong> Chọn Pet phù hợp với kẻ địch</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TruyenVitVang Game Studio. All rights reserved.</p>
+        <p>
+            <a href="privacy.html" style="color: #667eea; text-decoration: none;">Chính Sách Bảo Mật</a> | 
+            <a href="about.html" style="color: #667eea; text-decoration: none;">Về Chúng Tôi</a> | 
+            <a href="blog.html" style="color: #667eea; text-decoration: none;">Blog</a>
+        </p>
+    </footer>
+
+    <script>
+        function showArticle(articleId) {
+            document.getElementById('blog-list').style.display = 'none';
+            document.querySelectorAll('.blog-article').forEach(article => {
+                article.classList.remove('active');
+            });
+            document.getElementById(articleId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToBlog() {
+            document.getElementById('blog-list').style.display = 'block';
+            document.querySelectorAll('.blog-article').forEach(article => {
+                article.classList.remove('active');
+            });
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

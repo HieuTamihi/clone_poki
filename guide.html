@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Chơi - PokiWar Match-3 RPG</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Hướng dẫn chi tiết cách chơi PokiWar - từ cơ bản đến nâng cao. Học cách thu phục pet, chiến đấu hiệu quả và xây dựng đội hình mạnh nhất.">
+    <meta name="keywords" content="hướng dẫn pokiwar, cách chơi match-3, chiến thuật game, thu phục pet, tips and tricks">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4878455337844727"
+     crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .guide-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .guide-section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #667eea;
+            padding-left: 1rem;
+        }
+
+        .guide-section h3 {
+            color: #764ba2;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .guide-section p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .guide-section ul, .guide-section ol {
+            margin: 1rem 0 1rem 2rem;
+            color: #555;
+        }
+
+        .guide-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #f39c12;
+        }
+
+        .tip-box h4 {
+            color: #d35400;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fab1a0 0%, #ff7675 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #d63031;
+            color: white;
+        }
+
+        .warning-box h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #0984e3;
+            color: white;
+        }
+
+        .info-box h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #f39c12;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-card h3 {
+            color: white;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">🎮 PokiWar</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Chơi Game</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="guide.html">Hướng Dẫn</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="privacy.html">Chính Sách</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>📚 Hướng Dẫn Chơi PokiWar</h1>
+            <p>Tất cả những gì bạn cần biết để trở thành huấn luyện viên huyền thoại</p>
+        </div>
+
+        <div class="guide-section">
+            <h2>🎯 Bắt Đầu Với PokiWar</h2>
+            
+            <h3>Cách Bắt Đầu Game</h3>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Truy Cập Game</h3>
+                    <p>Mở trình duyệt và truy cập vào trang chủ PokiWar. Game sẽ tự động tải và sẵn sàng chơi ngay lập tức.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Chọn Pet Đầu Tiên</h3>
+                    <p>Bạn sẽ được chọn 1 trong 3 Pet khởi đầu thuộc các hệ khác nhau. Hãy chọn Pet phù hợp với phong cách chơi của bạn.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Hoàn Thành Tutorial</h3>
+                    <p>Làm theo hướng dẫn trong game để học cách chiến đấu, thu phục Pet và nâng cấp đội hình.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Bắt Đầu Phiêu Lưu</h3>
+                    <p>Khám phá các hành tinh, chiến đấu với kẻ địch và thu thập Pet mới!</p>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Mẹo Cho Người Mới</h4>
+                <p>Hãy hoàn thành tất cả màn chơi ở hành tinh đầu tiên trước khi chuyển sang hành tinh mới. Điều này giúp bạn làm quen với gameplay và thu thập đủ tài nguyên.</p>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>🎲 Cơ Chế Match-3</h2>
+            
+            <h3>Cách Chơi Match-3</h3>
+            <p>PokiWar sử dụng cơ chế Match-3 cổ điển nhưng được cải tiến để phù hợp với gameplay RPG:</p>
+            
+            <ol>
+                <li><strong>Chọn viên ngọc:</strong> Click hoặc tap vào một viên ngọc trên bảng</li>
+                <li><strong>Kéo để hoán đổi:</strong> Kéo sang viên ngọc bên cạnh để hoán đổi vị trí</li>
+                <li><strong>Tạo combo:</strong> Khi 3 hoặc nhiều viên ngọc cùng màu xếp thành hàng, chúng sẽ biến mất</li>
+                <li><strong>Gây sát thương:</strong> Mỗi combo sẽ gây sát thương lên kẻ địch</li>
+            </ol>
+
+            <h3>Các Loại Combo Đặc Biệt</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Loại Combo</th>
+                            <th>Cách Tạo</th>
+                            <th>Hiệu Ứng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>⚡ Combo 4</td>
+                            <td>Ghép 4 viên cùng màu</td>
+                            <td>Tạo viên ngọc sét, phá hủy 1 hàng hoặc cột</td>
+                        </tr>
+                        <tr>
+                            <td>💥 Combo 5 (L/T)</td>
+                            <td>Ghép 5 viên hình L hoặc T</td>
+                            <td>Tạo viên ngọc bom, phá hủy vùng 3x3</td>
+                        </tr>
+                        <tr>
+                            <td>🌟 Combo 5 (Thẳng)</td>
+                            <td>Ghép 5 viên thẳng hàng</td>
+                            <td>Tạo viên ngọc màu, xóa tất cả viên cùng màu</td>
+                        </tr>
+                        <tr>
+                            <td>🔥 Combo Kép</td>
+                            <td>Kích hoạt 2 combo đặc biệt cùng lúc</td>
+                            <td>Hiệu ứng kết hợp mạnh mẽ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <h4>ℹ️ Lưu Ý Quan Trọng</h4>
+                <p>Sát thương từ combo sẽ được nhân với hệ số nguyên tố. Ví dụ: Combo lửa sẽ gây x2 sát thương lên Pet hệ đất!</p>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>👾 Hệ Thống Pet</h2>
+            
+            <h3>Thu Phục Pet</h3>
+            <p>Có nhiều cách để thu phục Pet trong PokiWar:</p>
+            
+            <ul>
+                <li><strong>Chiến thắng trận đấu:</strong> Mỗi khi thắng, bạn có cơ hội nhận được Pet của kẻ địch</li>
+                <li><strong>Mở rương:</strong> Sử dụng Gems để mở rương chứa Pet hiếm</li>
+                <li><strong>Event đặc biệt:</strong> Tham gia event để nhận Pet độc quyền</li>
+                <li><strong>Hoàn thành nhiệm vụ:</strong> Một số Pet chỉ có thể nhận qua nhiệm vụ</li>
+            </ul>
+
+            <h3>Nâng Cấp Pet</h3>
+            <p>Pet có thể được nâng cấp theo nhiều cách:</p>
+            
+            <ol>
+                <li><strong>Level Up:</strong> Sử dụng EXP từ trận đấu hoặc vật phẩm EXP</li>
+                <li><strong>Evolution:</strong> Khi đạt level tối đa, Pet có thể tiến hóa thành dạng mạnh hơn</li>
+                <li><strong>Skill Upgrade:</strong> Nâng cấp kỹ năng bằng Skill Points</li>
+                <li><strong>Star Upgrade:</strong> Tăng số sao bằng cách thu thập Pet trùng lặp</li>
+            </ol>
+
+            <div class="tip-box">
+                <h4>💡 Chiến Thuật Nâng Cấp</h4>
+                <p>Tập trung nâng cấp 3-5 Pet chính thay vì nâng đều tất cả. Điều này giúp bạn có đội hình mạnh hơn nhanh chóng.</p>
+            </div>
+
+            <h3>Chỉ Số Pet</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Chỉ Số</th>
+                            <th>Ý Nghĩa</th>
+                            <th>Tầm Quan Trọng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>❤️ HP</td>
+                            <td>Máu - Khả năng sống sót</td>
+                            <td>Rất cao</td>
+                        </tr>
+                        <tr>
+                            <td>⚔️ ATK</td>
+                            <td>Tấn công - Sát thương gây ra</td>
+                            <td>Rất cao</td>
+                        </tr>
+                        <tr>
+                            <td>🛡️ DEF</td>
+                            <td>Phòng thủ - Giảm sát thương nhận</td>
+                            <td>Cao</td>
+                        </tr>
+                        <tr>
+                            <td>⚡ SPD</td>
+                            <td>Tốc độ - Thứ tự hành động</td>
+                            <td>Trung bình</td>
+                        </tr>
+                        <tr>
+                            <td>🎯 CRIT</td>
+                            <td>Chí mạng - Cơ hội đánh chí mạng</td>
+                            <td>Trung bình</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>⚔️ Chiến Đấu Hiệu Quả</h2>
+            
+            <h3>Xây Dựng Đội Hình</h3>
+            <p>Một đội hình tốt cần cân bằng giữa các yếu tố sau:</p>
+            
+            <ul>
+                <li><strong>Đa dạng nguyên tố:</strong> Có ít nhất 2-3 hệ nguyên tố khác nhau</li>
+                <li><strong>Cân bằng vai trò:</strong> 1 Tank (HP cao), 1-2 DPS (ATK cao), 1 Support</li>
+                <li><strong>Synergy:</strong> Chọn Pet có kỹ năng hỗ trợ lẫn nhau</li>
+                <li><strong>Counter kẻ địch:</strong> Nghiên cứu kẻ địch và chọn Pet phù hợp</li>
+            </ul>
+
+            <h3>Chiến Thuật Trong Trận Đấu</h3>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Quan Sát Bảng</h3>
+                    <p>Luôn nhìn toàn bộ bảng trước khi di chuyển. Tìm kiếm cơ hội tạo combo đặc biệt.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Ưu Tiên Combo</h3>
+                    <p>Combo 4-5 viên quan trọng hơn nhiều combo 3 viên nhỏ. Hãy lên kế hoạch tạo combo lớn.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Quản Lý MP</h3>
+                    <p>Không lãng phí MP vào skill yếu. Chờ đợi thời điểm phù hợp để dùng skill mạnh.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Kết Hợp Nguyên Tố</h3>
+                    <p>Sử dụng combo nguyên tố phù hợp để tối đa hóa sát thương lên kẻ địch.</p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Tránh Những Sai Lầm Này</h4>
+                <ul>
+                    <li>Không quan sát toàn bộ bảng trước khi di chuyển</li>
+                    <li>Lãng phí MP vào skill không hiệu quả</li>
+                    <li>Không chú ý đến hệ nguyên tố của kẻ địch</li>
+                    <li>Bỏ qua cơ hội tạo combo đặc biệt</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>💎 Quản Lý Tài Nguyên</h2>
+            
+            <h3>Các Loại Tài Nguyên</h3>
+            
+            <h4>💰 Gold (Vàng)</h4>
+            <p>Tài nguyên cơ bản, dùng để:</p>
+            <ul>
+                <li>Nâng cấp level Pet</li>
+                <li>Mua vật phẩm trong shop</li>
+                <li>Nâng cấp skill cơ bản</li>
+            </ul>
+            <p><strong>Cách kiếm:</strong> Chiến thắng trận đấu, hoàn thành nhiệm vụ hàng ngày</p>
+
+            <h4>💎 Gems (Ngọc)</h4>
+            <p>Tài nguyên cao cấp, dùng để:</p>
+            <ul>
+                <li>Mở rương Pet hiếm</li>
+                <li>Mua vật phẩm đặc biệt</li>
+                <li>Tăng tốc nâng cấp</li>
+            </ul>
+            <p><strong>Cách kiếm:</strong> Hoàn thành thành tựu, event đặc biệt, mua trong shop</p>
+
+            <h4>⭐ EXP (Kinh nghiệm)</h4>
+            <p>Dùng để nâng level Pet</p>
+            <p><strong>Cách kiếm:</strong> Chiến đấu, sử dụng vật phẩm EXP Potion</p>
+
+            <div class="tip-box">
+                <h4>💡 Mẹo Tiết Kiệm Tài Nguyên</h4>
+                <ul>
+                    <li>Không mở rương ngẫu nhiên, chờ event có tỷ lệ tốt hơn</li>
+                    <li>Ưu tiên nâng cấp Pet chính, không nâng đều tất cả</li>
+                    <li>Hoàn thành nhiệm vụ hàng ngày để nhận tài nguyên miễn phí</li>
+                    <li>Tham gia event để nhận thưởng lớn</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>🏆 Mẹo Và Thủ Thuật Nâng Cao</h2>
+            
+            <h3>Combo Cascade (Dây Chuyền)</h3>
+            <p>Khi một combo kích hoạt, các viên ngọc mới rơi xuống có thể tạo combo mới. Hãy tận dụng điều này:</p>
+            <ul>
+                <li>Tạo combo ở vị trí cao để tăng cơ hội cascade</li>
+                <li>Quan sát các viên ngọc đang rơi để dự đoán combo tiếp theo</li>
+                <li>Kết hợp với skill để tạo cascade lớn</li>
+            </ul>
+
+            <h3>Timing Skill</h3>
+            <p>Thời điểm sử dụng skill rất quan trọng:</p>
+            <ul>
+                <li><strong>Skill AOE:</strong> Dùng khi có nhiều mục tiêu hoặc boss có minion</li>
+                <li><strong>Skill Buff:</strong> Dùng trước khi tạo combo lớn</li>
+                <li><strong>Skill Heal:</strong> Dùng khi HP dưới 30%</li>
+                <li><strong>Skill Debuff:</strong> Dùng ngay đầu trận để giảm sức mạnh địch</li>
+            </ul>
+
+            <h3>Farming Hiệu Quả</h3>
+            <p>Để farm tài nguyên nhanh nhất:</p>
+            <ol>
+                <li>Chọn màn có tỷ lệ drop tốt (thường là màn boss)</li>
+                <li>Sử dụng đội hình tối ưu để clear nhanh</li>
+                <li>Farm trong event có bonus drop</li>
+                <li>Hoàn thành daily quest trước khi farm</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>ℹ️ Bảng Nguyên Tố</h4>
+                <p>Ghi nhớ bảng tương khắc:</p>
+                <ul>
+                    <li>🔥 Lửa > 🌍 Đất > 💧 Nước > 🔥 Lửa</li>
+                    <li>💨 Gió và ⚡ Sét: Trung lập với tất cả</li>
+                    <li>Sát thương x2 khi có lợi thế nguyên tố</li>
+                    <li>Sát thương x0.5 khi bất lợi nguyên tố</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2>❓ Câu Hỏi Thường Gặp (FAQ)</h2>
+            
+            <h3>Q: Game có cần kết nối internet không?</h3>
+            <p>A: Sau khi tải lần đầu, bạn có thể chơi offline. Tuy nhiên, cần internet để đồng bộ tiến trình và tham gia event.</p>
+
+            <h3>Q: Làm sao để lấy lại tài khoản nếu mất?</h3>
+            <p>A: Dữ liệu được lưu trên trình duyệt. Nếu xóa cache, dữ liệu sẽ mất. Chúng tôi khuyên bạn nên cài đặt game như PWA để bảo vệ dữ liệu tốt hơn.</p>
+
+            <h3>Q: Pet nào mạnh nhất?</h3>
+            <p>A: Không có Pet "mạnh nhất". Mỗi Pet có điểm mạnh riêng. Quan trọng là xây dựng đội hình cân bằng và phù hợp với phong cách chơi.</p>
+
+            <h3>Q: Có cần mua Gems không?</h3>
+            <p>A: Không bắt buộc. Game hoàn toàn free-to-play. Bạn có thể kiếm đủ Gems qua gameplay bình thường.</p>
+
+            <h3>Q: Làm sao để báo lỗi?</h3>
+            <p>A: Vui lòng liên hệ qua trang Blog hoặc gửi feedback trong game.</p>
+        </div>
+
+        <div class="guide-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; border-left-color: white;">🎮 Sẵn Sàng Chinh Phục?</h2>
+            <p>Bây giờ bạn đã có đủ kiến thức để trở thành huấn luyện viên huyền thoại! Hãy áp dụng những gì đã học và bắt đầu phiêu lưu của bạn.</p>
+            <p style="margin-top: 1.5rem;">
+                <a href="index.html" style="background: white; color: #667eea; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block;">Chơi Ngay</a>
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TruyenVitVang Game Studio. All rights reserved.</p>
+        <p>
+            <a href="privacy.html" style="color: #667eea; text-decoration: none;">Chính Sách Bảo Mật</a> | 
+            <a href="about.html" style="color: #667eea; text-decoration: none;">Về Chúng Tôi</a> | 
+            <a href="blog.html" style="color: #667eea; text-decoration: none;">Blog</a>
+        </p>
+    </footer>
+</body>
+</html>
